@@ -1,9 +1,14 @@
 from collections import deque
 
+graph = {'A': ['M', 'P'],
+         'M': ['A', 'N'],
+         'N': ['M', 'B'],
+         'P': ['A', 'B'],
+         'B': ['P', 'N']}
 
 def bfs(start, goal, graph):
     queue = deque([start])
-    visited = {start: None}
+    visited = {x:[] for x in graph.keys()}
 
     while queue:
         cur_node = queue.popleft()
@@ -15,20 +20,14 @@ def bfs(start, goal, graph):
             if next_node not in visited:
                 queue.append(next_node)
                 visited[next_node] = cur_node
-    print(visited)
     return visited
 
+start = 'A'
+goal = 'B'
+visited = bfs(start, goal, graph)
 
-start = 1
-goal = 2
-
-if __name__ == '__main__':
-    graph = [[0, 0, 1, 0, 1, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 0, 1],
-             [1, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 1, 0, 0, 0],
-             [1, 0, 0, 1, 0, 0, 1, 1],
-             [0, 0, 0, 0, 0, 0, 0, 1],
-             [0, 0, 0, 0, 1, 0, 0, 0],
-             [0, 1, 0, 0, 1, 1, 0, 0]]
-    bfs(1, 7, graph)
+cur_node = goal
+print(f'\npath from {goal} to {start}: \n {goal} ', end='')
+while cur_node != start:
+    cur_node = visited[cur_node]
+    print(f'---> {cur_node} ', end='')
