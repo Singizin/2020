@@ -4,7 +4,7 @@ road = [int(i) for i in input().split()]
 all_ground = sum(road)
 ground_first = 0
 sep_pos = 0
-move_min = None
+move_min = all_ground
 for i in range(1, N):
     ground_first += road[i-1]
     ground_second = all_ground - ground_first
@@ -15,12 +15,13 @@ for i in range(1, N):
     for j in range(1, i):
         if road[j] > h1:
             move += road[j] - h1
+            if move > move_min:
+                continue
     for j in range(i, N):
         if road[j] > h2:
             move += road[j] - h2
-    if move_min == None:
-        move_min = move
-        sep_pos = i
+            if move > move_min:
+                continue
     if move < move_min:
         move_min = move
         sep_pos = i
