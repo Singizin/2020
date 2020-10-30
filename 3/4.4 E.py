@@ -6,6 +6,7 @@ ground_first = 0
 sep_pos = 0
 move_min = all_ground
 for i in range(1, N):
+    flag = False
     ground_first += road[i-1]
     ground_second = all_ground - ground_first
     # print('земли на участке - ', ground_first, ground_second)
@@ -16,12 +17,14 @@ for i in range(1, N):
         if road[j] > h1:
             move += road[j] - h1
             if move > move_min:
-                continue
-    for j in range(i, N):
-        if road[j] > h2:
-            move += road[j] - h2
-            if move > move_min:
-                continue
+                flag = True
+                break
+    if not flag:
+        for j in range(i, N):
+            if road[j] > h2:
+                move += road[j] - h2
+                if move > move_min:
+                    break
     if move < move_min:
         move_min = move
         sep_pos = i
