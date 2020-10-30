@@ -24,9 +24,10 @@ for i in range(1, N):
             if road[j] > h2:
                 move += road[j] - h2
                 if move > move_min:
+                    flag = True
                     break
-    if move < move_min:
-        move_min = move
-        sep_pos = i
+        if not flag:
+            move_min = move
+            sep_pos = i
 
 print(sep_pos, N-sep_pos)
