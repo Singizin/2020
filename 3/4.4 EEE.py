@@ -21,9 +21,11 @@ def read_as_dict():
 
     for i in range(N - 1):
         a, b = input().split()
+        if i == interest - 1:
+            bridge = (a, b)
         islands[str(a)].extend([b])
         islands[str(b)].extend([a])
-    return islands, N, interest
+    return islands, N, bridge
 
 
 def read_as_dict_set():
@@ -43,14 +45,14 @@ def paths(graph, start, end, interest):
     while 0 < len(todo):
         (node, path) = todo.pop(0)
         for next_node in graph[node]:
-            # print(next_node)
+            print(next_node)
             if next_node in path:
                 continue
             elif next_node == end:
                 yield path + [next_node]
             else:
                 todo.append([next_node, path + [next_node]])
-    print(path)
+    return False
 
 
 def dfs(graph, start, visited=None):
@@ -63,27 +65,26 @@ def dfs(graph, start, visited=None):
     return visited
 
 
-# print(dfs(read_as_dict_set()[0], '1'))
-
-
 graph_dict, N, interest = read_as_dict()
 islands = list(graph_dict.keys())
-lenght = 0
+counter = 0
 
 len_to_next = {x: 0 for x in islands}
-# print(len_to_next)
+
 for i in range(N):
     if i == N - 1:
-        p = paths(graph_dict, islands[-1], islands[0])
+        if paths(graph_dict, islands[-1], islands[0], interest):
+            counter += 1
     else:
-        p = paths(graph_dict, islands[i], islands[i + 1])
-    for i in p:
-        lenght += len(i) - 1
-# print(lenght)
+        if paths(graph_dict, islands[i], islands[i + 1], interest):
+            counter += 1
+
+
+print(counter)
 
 
 """
-8
+8 1
 5 8
 1 3
 8 6
