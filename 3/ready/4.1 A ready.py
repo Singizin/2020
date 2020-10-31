@@ -56,6 +56,7 @@ def dfs(graph, start, visited=None):
         dfs(graph, next, visited)
     return visited
 
+
 data = input()
 
 N = len(data)

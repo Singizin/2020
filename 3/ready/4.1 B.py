@@ -5,7 +5,7 @@ def sqc(xa,ya,xb,yb,xc,yc):
 xa, ya, xb, yb = map(float,input().split())
 n, m = map(int,input().split())
 a = []
-sc  = []
+sc = []
 res, smax = 0, 0
 for i in range(n):
     xc, yc = map(float,input().split())
