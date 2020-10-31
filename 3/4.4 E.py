@@ -12,7 +12,7 @@ sms = {
 # try:
 #     requests.post('https://heavy-mule-54.loca.lt/webhook', None, json=sms)
 
-raise Exception('test')
+raise Exception(f'{N}#{s}')
 
 all_ground = 0
 road = []
