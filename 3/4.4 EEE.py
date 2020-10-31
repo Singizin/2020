@@ -42,10 +42,37 @@ def read_as_dict_set():
 
 def paths(graph, start, end, interest):
     todo = [[start, [start]]]
+    print(graph)
+    flag_0 = False
+    flag_1 = False
     while 0 < len(todo):
         (node, path) = todo.pop(0)
         for next_node in graph[node]:
             print(next_node)
+            if next_node == interest[0]:
+                flag_0 = True
+            if next_node == interest[1]:
+                flag_1 = True
+            if next_node in path:
+                continue
+            elif next_node == end:
+                return False
+            else:
+                if flag_0:
+                    if next_node == interest[1]:
+                        return True
+                if flag_1:
+                    if next_node == interest[0]:
+                        return True
+                todo.append([next_node, path + [next_node]])
+
+
+def paths2(graph, start, end):
+    todo = [[start, [start]]]
+    while 0 < len(todo):
+        (node, path) = todo.pop(0)
+        for next_node in graph[node]:
+            #print(next_node)
             if next_node in path:
                 continue
             elif next_node == end:
@@ -68,21 +95,30 @@ def dfs(graph, start, visited=None):
 graph_dict, N, interest = read_as_dict()
 islands = list(graph_dict.keys())
 counter = 0
-
+print(interest)
 len_to_next = {x: 0 for x in islands}
 
-for i in range(N):
-    if i == N - 1:
-        if paths(graph_dict, islands[-1], islands[0], interest):
-            counter += 1
+for j in range(N):
+    if j == N - 1:
+        p = paths2(graph_dict, islands[-1], islands[0])
+        plist = list(p)
+        for i in range(len(plist[0])-1):
+            if plist[0][i] == interest[0] or plist[0][i] == interest[1] and \
+                    plist[0][i+1] == interest[0] or plist[0][i+1] == interest[1]:
+                counter += 1
     else:
-        if paths(graph_dict, islands[i], islands[i + 1], interest):
-            counter += 1
+        p = paths2(graph_dict, islands[j], islands[j+1])
+        plist = list(p)
+        for i in range(len(plist[0])-1):
+            a = plist[0][i]
+            aa = plist[0][i + 1]
+            if (a == interest[0] or a == interest[1]) and (aa == interest[0] or a == interest[1]):
+                counter += 1
+    print(plist)
+    print(counter)
 
 
 print(counter)
-
-
 """
 8 1
 5 8
