@@ -1,12 +1,5 @@
-
 N = int(input())
 s = input().split(' ')
-
-# try:
-#     requests.post('https://heavy-mule-54.loca.lt/webhook', None, json=sms)
-
-if s != ['8', '20', '2', '10', '4', '3', '1', '1']:
-    raise Exception(f'{N},{s}')
 
 all_ground = 0
 road = []
@@ -22,7 +15,6 @@ move_min = all_ground
 for i in range(1, N):
     flag = False
     ground_first += road[i - 1]
-    ground_second -= road[i - 1]
     h1 = ground_first / i
     move = 0
     for j in range(1, i):
@@ -32,6 +24,7 @@ for i in range(1, N):
                 flag = True
                 break
     if not flag:
+        ground_second = all_ground - ground_first
         h2 = ground_second / (N - i)
         for j in range(i, N):
             if road[j] > h2:
