@@ -23,3 +23,4 @@ while True:
     counter += 1
     if counter > 0 and counter % 100 == 0:
         print('t = 0.{}	N = {}'.format(counter//100, broken))
+        broken = 0
