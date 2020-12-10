@@ -12,8 +12,8 @@ class star_unique:
         self.all = self.center, self.len_ray
 
 
-cols = 15
-rows = 10
+cols = 200
+rows = 300
 
 stars = []
 
